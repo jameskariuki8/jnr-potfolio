@@ -399,10 +399,6 @@
 
                           <!-- ===== timeline item ===== -->
                           <div class="timeline-item">
-                          
-
-                           
-
                            
                           </div>
                         </div>
@@ -494,8 +490,7 @@
 
                   <h4>Web Design</h4>
                   <p>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Nihil velit ab itaque.
+                    Creating responsive, visual appealing, and user-centered experiences designs.
                   </p>
                 </div>
               </div>
@@ -508,10 +503,9 @@
                     <i class="fa fa-laptop-code"></i>
                   </div>
 
-                  <h4>Web Design</h4>
+                  <h4>Frontend Development</h4>
                   <p>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Nihil velit ab itaque.
+                    HTML, CSS, JavaScipt, bootstrap, Nextjs and React
                   </p>
                 </div>
               </div>
@@ -524,10 +518,9 @@
                     <i class="fa fa-palette"></i>
                   </div>
 
-                  <h4>Web Design</h4>
+                  <h4>Backend Development</h4>
                   <p>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Nihil velit ab itaque.
+                    Python, django, Flusk, MYSQL, Clerk Authentication Postgress Database
                   </p>
                 </div>
               </div>
@@ -540,10 +533,9 @@
                     <i class="fa fa-code"></i>
                   </div>
 
-                  <h4>Web Design</h4>
+                  <h4>Chatbot</h4>
                   <p>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Nihil velit ab itaque.
+                    Finetuning and integrating Gemini AI to offer customer support 
                   </p>
                 </div>
               </div>
@@ -556,10 +548,9 @@
                     <i class="fa fa-search"></i>
                   </div>
 
-                  <h4>Web Design</h4>
+                  <h4>Website Maintaince and Upgrading </h4>
                   <p>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Nihil velit ab itaque.
+                    Horizontal and vetical website scalling and Upgrading of dependencies versions.
                   </p>
                 </div>
               </div>
@@ -572,10 +563,9 @@
                     <i class="fa fa-bullhorn"></i>
                   </div>
 
-                  <h4>Web Design</h4>
+                  <h4>School Projects</h4>
                   <p>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Nihil velit ab itaque.
+                    Development of students proposal projects at affordable prices.
                   </p>
                 </div>
               </div>
@@ -596,7 +586,7 @@
 
             <div class="row">
               <div class="portfolio-heading padd-15">
-                <h2>My Last Projects :</h2>
+                <h2>My Projects :</h2>
               </div>
             </div>
 
@@ -710,7 +700,7 @@
                 <div class="icon"><i class="fa fa-globe-europe"></i></div>
 
                 <h4>Website</h4>
-                <p>www.domain.com</p>
+                <p>https://james-kariuki.xyz</p>
               </div>
               <!-- ===== Contact info item end ====== -->
             </div>
@@ -723,6 +713,7 @@
             <!-- ====== Contact Form ====== -->
             <div class="row">
               <div class="contact-form padd-15">
+                <form id="contactForm" action="https://formspree.io/f/mjkkpzej" method="POST">
                 <div class="row">
                   <div class="form-item col-6 padd-15">
                     <div class="form-group">
@@ -761,7 +752,7 @@
                   <div class="form-item col-12 padd-15">
                     <div class="form-group">
                       <textarea
-                        name=""
+                        name="message"
                         class="form-control"
                         id=""
                         placeholder="Message"
@@ -775,6 +766,7 @@
                     <button type="submit" class="btn">Send Message</button>
                   </div>
                 </div>
+              </form>
               </div>
             </div>
           </div>
@@ -812,6 +804,65 @@
       src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"
       referrerpolicy="no-referrer"
     ></script>
+    <script>
+      document.getElementById("contactForm").addEventListener("submit", function(event) {
+          event.preventDefault(); // Prevent default form submission behavior
+  
+          const formData = new FormData(this);
+  
+          fetch("https://formspree.io/f/mjkkpzej", {
+              method: "POST",
+              body: formData,
+              headers: { 'Accept': 'application/json' }
+          }).then(response => {
+              if (response.ok) {
+                  // Show falling flowers and gifts animation
+                  for (let i = 0; i < 15; i++) {
+                      let gift = document.createElement("img");
+                      let images = [
+                          "https://cdn-icons-png.flaticon.com/512/4729/4729050.png",
+                          "https://cdn-icons-png.flaticon.com/512/4729/4729077.png",
+                          "https://cdn-icons-png.flaticon.com/512/4729/4729039.png",
+                          "https://cdn-icons-png.flaticon.com/512/4729/4729040.png"
+                      ];
+                      gift.src = images[Math.floor(Math.random() * images.length)];
+                      gift.classList.add("falling-item");
+                      gift.style.left = Math.random() * window.innerWidth + "px";
+                      gift.style.animationDuration = Math.random() * 3 + 2 + "s";
+                      document.body.appendChild(gift);
+                      setTimeout(() => gift.remove(), 5000);
+                  }
+  
+                  // Display congratulation message
+                  let messageBox = document.createElement("div");
+                  messageBox.innerHTML = "<h2>🎉 Congratulations! Your message has been sent successfully! 🎉</h2>";
+                  messageBox.style.position = "fixed";
+                  messageBox.style.top = "50%";
+                  messageBox.style.left = "50%";
+                  messageBox.style.transform = "translate(-50%, -50%)";
+                  messageBox.style.background = "rgba(0, 0, 0, 0.8)";
+                  messageBox.style.color = "white";
+                  messageBox.style.padding = "20px";
+                  messageBox.style.borderRadius = "10px";
+                  messageBox.style.textAlign = "center";
+                  messageBox.style.fontSize = "1.5rem";
+                  messageBox.style.zIndex = "1000";
+                  document.body.appendChild(messageBox);
+  
+                  // Redirect to the homepage after 3 seconds
+                  setTimeout(() => {
+                      messageBox.remove();
+                      window.location.href = "index.html"; // Change this to your homepage URL
+                  }, 3000); // 3-second delay before redirect
+              } else {
+                  alert("Oops! Something went wrong. Please try again.");
+              }
+          }).catch(error => {
+              console.error("Error:", error);
+              alert("Submission failed. Check your connection and try again.");
+          });
+      });
+  </script>
 
     <script src="js/script.js"></script>
 
