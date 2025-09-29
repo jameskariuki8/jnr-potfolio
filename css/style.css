@@ -674,6 +674,36 @@ h3.my-profession {
   display: block;
 }
 
+/* Portfolio captions and link buttons */
+.portfolio .project-title {
+  margin: 12px 0 8px;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  color: var(--skin-color);
+}
+
+.portfolio .project-links {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 8px 0 12px;
+}
+
+.portfolio .project-links .btn {
+  padding: 10px 14px;
+  border-radius: 28px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+@media (max-width: 575px) {
+  .portfolio .project-links { gap: 8px; }
+  .portfolio .project-links .btn { padding: 10px; }
+}
+
 /* contact */
 .contact-title {
   color: var(--skin-color);
