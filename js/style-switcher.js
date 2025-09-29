@@ -1,43 +1,42 @@
-/* ========================== toggle style switcher =========================== */
-const styleSwitcherToggle = document.querySelector('.style-switcher-toggler');
-
-styleSwitcherToggle.addEventListener('click', () => {
-  document.querySelector('.style-switcher').classList.toggle('open');
-});
-
-// hide style - switcher on scroll
-window.addEventListener('scroll', () => {
-  if (document.querySelector('.style-switcher').classList.contains('open')) {
-    document.querySelector('.style-switcher').classList.remove('open');
-  }
-});
-
-/* ========================== theme colors =========================== */
-const alternateStyles = document.querySelectorAll('.alternate-style');
-
-function setActiveStyle(color) {
-  alternateStyles.forEach((style) => {
-    if (color === style.getAttribute('title')) {
-      style.removeAttribute('disabled');
-    } else {
-      style.setAttribute('disabled', 'true');
+/* Initialize style switcher after DOM and partials are ready */
+(function(){
+  function init(){
+    var styleSwitcherToggle = document.querySelector('.style-switcher-toggler');
+    if (styleSwitcherToggle) {
+      styleSwitcherToggle.addEventListener('click', function(){
+        var panel = document.querySelector('.style-switcher');
+        if (panel) panel.classList.toggle('open');
+      });
     }
-  });
-}
 
-/* ========================== theme light and dark mode =========================== */
-const dayNight = document.querySelector('.day-night');
+    window.addEventListener('scroll', function(){
+      var panel = document.querySelector('.style-switcher');
+      if (panel && panel.classList.contains('open')) panel.classList.remove('open');
+    });
 
-dayNight.addEventListener('click', () => {
-  dayNight.querySelector('i').classList.toggle('fa-sun');
-  dayNight.querySelector('i').classList.toggle('fa-moon');
-  document.body.classList.toggle('dark');
-});
+    // define setActiveStyle only if not already defined (avoid redeclare errors)
+    if (typeof window.setActiveStyle !== 'function') {
+      var alternateStyles = document.querySelectorAll('.alternate-style');
+      window.setActiveStyle = function(color){
+        alternateStyles.forEach(function(style){
+          if (color === style.getAttribute('title')) {
+            style.removeAttribute('disabled');
+            try { style.disabled = false; } catch(e) {}
+          } else {
+            style.setAttribute('disabled', 'true');
+            try { style.disabled = true; } catch(e) {}
+          }
+        });
+      };
+    }
 
-window.addEventListener('load', () => {
-  if (document.body.classList.contains('dark')) {
-    dayNight.querySelector('i').classList.add('fa-sun');
-  } else {
-    dayNight.querySelector('i').classList.add('fa-moon');
+    // day-night button is managed in common.js for persistence
   }
-});
+
+  document.addEventListener('partialsLoaded', init);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();

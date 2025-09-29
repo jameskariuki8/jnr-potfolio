@@ -1,0 +1,35 @@
+<div class="style-switcher">
+  <div class="style-switcher-toggler s-icon">
+    <i class="fas fa-cog fa-spin"></i>
+  </div>
+  <div class="day-night s-icon">
+    <i class="fas"></i>
+  </div>
+  <h4>Theme Colors</h4>
+  <div class="colors">
+    <span class="color-1" data-color="color-1"></span>
+    <span class="color-2" data-color="color-2"></span>
+    <span class="color-3" data-color="color-3"></span>
+    <span class="color-4" data-color="color-4"></span>
+    <span class="color-5" data-color="color-5"></span>
+  </div>
+  <script>
+    (function(){
+      function bindColorClicks(){
+        var swatches = document.querySelectorAll('.style-switcher .colors [data-color]');
+        swatches.forEach(function(s){
+          s.addEventListener('click', function(){
+            var c = s.getAttribute('data-color');
+            if (window.setActiveStyle) window.setActiveStyle(c);
+          });
+        });
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', bindColorClicks);
+      } else {
+        bindColorClicks();
+      }
+    })();
+  </script>
+</div>
+

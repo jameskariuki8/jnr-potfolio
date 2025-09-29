@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="preview.jpeg" type="image/x-icon" />
+  <title>Contact | James Kariuki</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/skins/color-1.css" />
+  <link rel="stylesheet" href="css/style-switcher.css" />
+  <link rel="stylesheet" href="css/skins/color-1.css" class="alternate-style" title="color-1" disabled />
+  <link rel="stylesheet" href="css/skins/color-2.css" class="alternate-style" title="color-2" disabled />
+  <link rel="stylesheet" href="css/skins/color-3.css" class="alternate-style" title="color-3" disabled />
+  <link rel="stylesheet" href="css/skins/color-4.css" class="alternate-style" title="color-4" disabled />
+  <link rel="stylesheet" href="css/skins/color-5.css" class="alternate-style" title="color-5" disabled />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  </head>
+  <body>
+    <canvas id="contact-wireframe" class="bg-wireframe" aria-hidden="true"></canvas>
+    <div class="main-container">
+      <div data-include="partials/aside.html"></div>
+      <div class="main-content">
+        <section class="contact section active" id="contact">
+          <div class="container">
+            <div class="row">
+              <div class="section-title padd-15"><h2>Contact Me</h2></div>
+            </div>
+            <h3 class="contact-title padd-15">Have You Any Questions ?</h3>
+            <h4 class="contact-sub-title padd-15">I'M AT YOUR SERVICES</h4>
+            <div class="row">
+              <div class="contact-info-item padd-15"><div class="icon"><i class="fa fa-phone"></i></div><h4>Call Us On</h4><p>+254 797394442</p></div>
+              <div class="contact-info-item padd-15"><div class="icon"><i class="fab fa-github" style="color: red; font-size: 28px;"></i></div><h4>Github</h4><p>https://github.com/jameskariuki8</p></div>
+              <div class="contact-info-item padd-15"><div class="icon"><i class="fa fa-envelope"></i></div><h4>Email</h4><p>juniorkariuki735@gmail.com</p></div>
+              <div class="contact-info-item padd-15"><div class="icon"><i class="fab fa-linkedin" style="color: red; font-size: 28px;"></i></div><h4>LinkedIn</h4><p>https://linkedin.com/in/james-kariuki-</p></div>
+            </div>
+            <h3 class="contact-title padd-15">SEND ME AN EMAIL</h3>
+            <h4 class="contact-sub-title padd-15">I'M VERY RESPOSIVE TO MESSAGES</h4>
+            <div class="row">
+              <div class="contact-form padd-15">
+                <form id="contactForm" action="https://formspree.io/f/mnnvkddz" method="POST">
+                  <div class="row">
+                    <div class="form-item col-6 padd-15"><div class="form-group"><input type="text" class="form-control" placeholder="Name" /></div></div>
+                    <div class="form-item col-6 padd-15"><div class="form-group"><input type="email" class="form-control" placeholder="Email" /></div></div>
+                  </div>
+                  <div class="row">
+                    <div class="form-item col-12 padd-15"><div class="form-group"><input type="text" class="form-control" placeholder="Subject" /></div></div>
+                  </div>
+                  <div class="row">
+                    <div class="form-item col-12 padd-15"><div class="form-group"><textarea name="message" class="form-control" placeholder="Message"></textarea></div></div>
+                  </div>
+                  <div class="row">
+                    <div class="form-item col-12 padd-15"><button type="submit" class="btn">Send Message</button></div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+    <div data-include="partials/style-switcher.html"></div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function(){
+        var form = document.getElementById('contactForm');
+        form && form.addEventListener('submit', function(event){
+          event.preventDefault();
+          var formData = new FormData(form);
+          fetch('https://formspree.io/f/mnnvkddz', { method: 'POST', body: formData, headers: { 'Accept': 'application/json' }})
+          .then(function(response){
+            if (response.ok) {
+              for (var i = 0; i < 15; i++) {
+                var gift = document.createElement('img');
+                var images = ['https://cdn-icons-png.flaticon.com/512/4729/4729050.png','https://cdn-icons-png.flaticon.com/512/4729/4729077.png','https://cdn-icons-png.flaticon.com/512/4729/4729039.png','https://cdn-icons-png.flaticon.com/512/4729/4729040.png'];
+                gift.src = images[Math.floor(Math.random() * images.length)];
+                gift.classList.add('falling-item');
+                gift.style.left = Math.random() * window.innerWidth + 'px';
+                gift.style.animationDuration = Math.random() * 3 + 2 + 's';
+                document.body.appendChild(gift);
+                setTimeout(function(g){ return function(){ g.remove(); }; }(gift), 5000);
+              }
+              var messageBox = document.createElement('div');
+              messageBox.innerHTML = '<h2>🎉 Congratulations! Your message has been sent successfully! 🎉</h2>';
+              messageBox.style.position = 'fixed';
+              messageBox.style.top = '50%';
+              messageBox.style.left = '50%';
+              messageBox.style.transform = 'translate(-50%, -50%)';
+              messageBox.style.background = 'rgba(0, 0, 0, 0.8)';
+              messageBox.style.color = 'white';
+              messageBox.style.padding = '20px';
+              messageBox.style.borderRadius = '10px';
+              messageBox.style.textAlign = 'center';
+              messageBox.style.fontSize = '1.5rem';
+              messageBox.style.zIndex = '1000';
+              document.body.appendChild(messageBox);
+              setTimeout(function(){ messageBox.remove(); window.location.href = 'index.html'; }, 3000);
+            } else {
+              alert('Oops! Something went wrong. Please try again.');
+            }
+          }).catch(function(){ alert('Submission failed. Check your connection and try again.'); });
+        });
+      });
+    </script>
+    <script src="js/includes.js"></script>
+    <script src="js/style-switcher.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/effects.js"></script>
+  </body>
+</html>
+
+

@@ -20,6 +20,7 @@ body {
   line-height: 1.5;
   font-size: 16px;
   font-family: 'Poppins' sans-serif;
+  background: var(--bg-black-900);
 }
 
 * {
@@ -310,8 +311,10 @@ ul {
 }
 
 .home .home-info {
-  flex: 0 0 60%;
-  max-width: 60%;
+  flex: 0 0 56%;
+  max-width: 56%;
+  position: relative;
+  z-index: 2;
 }
 
 h3.hello {
@@ -346,6 +349,8 @@ h3.my-profession {
   max-width: 40%;
   text-align: center;
   position: relative;
+  margin-left: 24px;
+  z-index: 1;
 }
 
 .home-img::after {
@@ -366,7 +371,7 @@ h3.my-profession {
   width: 80px;
   border-top: 10px solid var(--skin-color);
   border-left: 10px solid var(--skin-color);
-  left: -20px;
+  left: 20px;
   top: -40px;
 }
 
@@ -758,6 +763,19 @@ h3.my-profession {
   height: 50px;
   padding: 0 50px;
 }
+
+/* Contact page: full-screen wireframe background */
+.bg-wireframe {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Let contact section be transparent so background is visible */
+.contact.section { background: transparent; z-index: 1; }
 
 @media (max-width: 1199px) {
   .section .container {

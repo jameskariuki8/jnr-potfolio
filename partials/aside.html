@@ -1,0 +1,51 @@
+<div class="aside">
+  <div class="logo">
+    <a href="index.html"><span>K</span>ariuki</a>
+  </div>
+
+  <div class="nav-toggler">
+    <span></span>
+  </div>
+
+  <ul class="nav">
+    <li>
+      <a href="index.html"><i class="fa fa-home"></i> Home</a>
+    </li>
+    <li>
+      <a href="about.html"><i class="fa fa-user"></i> About</a>
+    </li>
+    <li>
+      <a href="services.html"><i class="fa fa-list"></i>Services</a>
+    </li>
+    <li>
+      <a href="portfolio.html"><i class="fa fa-briefcase"></i>Portfolio</a>
+    </li>
+    <li>
+      <a href="contact.html"><i class="fa fa-comments"></i>Contact</a>
+    </li>
+  </ul>
+</div>
+
+<script>
+  (function() {
+    var links = document.querySelectorAll('.aside .nav a');
+    var path = location.pathname.split('/').pop() || 'index.html';
+    links.forEach(function(link){
+      var href = link.getAttribute('href');
+      if (href === path) {
+        link.classList.add('active');
+      }
+    });
+
+    var navTogglerBtn = document.querySelector('.nav-toggler');
+    var aside = document.querySelector('.aside');
+    navTogglerBtn && navTogglerBtn.addEventListener('click', function(){
+      aside.classList.toggle('open');
+      navTogglerBtn.classList.toggle('open');
+      var sections = document.querySelectorAll('.section');
+      sections.forEach(function(s){ s.classList.toggle('open'); });
+    });
+  })();
+</script>
+
+

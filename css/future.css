@@ -1,0 +1,220 @@
+/* Futuristic visual layer: gradients, neon glows, glassmorphism, responsive type */
+
+:root {
+  --fx-neon: rgba(0, 255, 245, 0.75);
+  --fx-neon-2: rgba(160, 32, 240, 0.75);
+  --fx-glass-bg: rgba(255, 255, 255, 0.08);
+  --fx-glass-border: rgba(255, 255, 255, 0.18);
+}
+
+body {
+  background-image: radial-gradient(1200px 600px at 70% -10%, rgba(0, 255, 255, 0.12), transparent 60%),
+                    radial-gradient(800px 400px at 10% 10%, rgba(255, 0, 180, 0.10), transparent 60%);
+}
+
+body.dark {
+  background-image: radial-gradient(1200px 600px at 70% -10%, rgba(0, 255, 255, 0.06), transparent 60%),
+                    radial-gradient(800px 400px at 10% 10%, rgba(255, 0, 180, 0.06), transparent 60%);
+}
+
+/* Hero FX container */
+.hero-stage {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero-bg, .hero-mid, .hero-fg {
+  position: relative;
+}
+
+/* Particles canvas behind content */
+#fx-particles {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+#fx-stars, #fx-globe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Neon grid */
+.fx-grid {
+  position: absolute;
+  left: -5%;
+  right: -5%;
+  bottom: -20px;
+  height: 40vh;
+  background: linear-gradient(transparent 0%, rgba(255,255,255,0.06) 2%, transparent 4%),
+              linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.06) 2%, transparent 4%);
+  background-size: 100px 40px, 100px 40px;
+  transform: perspective(600px) rotateX(60deg);
+  filter: drop-shadow(0 0 12px var(--fx-neon));
+  opacity: 0.6;
+  z-index: 1;
+}
+
+/* Glow orbs */
+.fx-orbs {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.fx-orb {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(255,255,255,0.2) 40%, rgba(255,255,255,0) 60%),
+              radial-gradient(circle at 60% 60%, var(--fx-neon), rgba(0,0,0,0) 60%);
+  mix-blend-mode: screen;
+  filter: blur(2px) saturate(1.2);
+}
+.fx-orb.orb-1 { top: 10%; left: 60%; }
+.fx-orb.orb-2 { top: 35%; left: 5%; width: 100px; height: 100px; }
+.fx-orb.orb-3 { top: 65%; left: 75%; width: 180px; height: 180px; }
+
+/* Glassmorphism card for hero text */
+.glass-card {
+  background: var(--fx-glass-bg);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--fx-glass-border);
+  border-radius: 18px;
+  padding: 24px 28px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+/* Holographic frame around images */
+.holo-frame {
+  position: relative;
+  display: inline-block;
+  border-radius: 12px;
+  padding: 8px;
+  background: linear-gradient(135deg, var(--skin-color), rgba(0,255,245,0.6), rgba(160,32,240,0.6));
+}
+.holo-frame::before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border-radius: 10px;
+  background: var(--bg-black-100);
+  z-index: 0;
+}
+.holo-frame img {
+  position: relative;
+  z-index: 1;
+  border-radius: 10px;
+  display: block;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.25));
+}
+
+/* Neon outline pulse respecting theme */
+.neon-outline {
+  box-shadow: 0 0 0 rgba(0,0,0,0), 0 0 18px var(--skin-color), 0 0 36px rgba(0,255,245,0.25);
+  transition: box-shadow 400ms ease, transform 400ms ease;
+}
+.neon-outline:hover {
+  box-shadow: 0 0 0 rgba(0,0,0,0), 0 0 24px var(--skin-color), 0 0 48px rgba(0,255,245,0.35);
+}
+
+/* Tilt-enabled elements */
+.holo-tilt {
+  transform-style: preserve-3d;
+  transform: perspective(800px) rotateX(0deg) rotateY(0deg);
+  will-change: transform;
+}
+.holo-tilt img { transform: translateZ(24px); }
+
+/* Aurora gradient backdrop for hero */
+.hero-aurora {
+  position: absolute;
+  inset: -10% -5% -5% -5%;
+  z-index: 0;
+  background: radial-gradient(60% 40% at 75% 20%, rgba(0,255,245,0.12), transparent 60%),
+              radial-gradient(50% 35% at 15% 30%, rgba(160,32,240,0.12), transparent 60%);
+  pointer-events: none;
+}
+
+/* Futuristic type */
+.hero-title {
+  font-size: clamp(28px, 5vw, 56px);
+  line-height: 1.1;
+  letter-spacing: 0.5px;
+}
+.hero-title .fx-gradient {
+  background: linear-gradient(90deg, var(--skin-color), var(--fx-neon-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-subtitle {
+  font-size: clamp(18px, 2.6vw, 28px);
+  color: var(--text-black-700);
+}
+
+/* CTA micro-interactions */
+.btn.fx-cta {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 0 rgba(0,0,0,0);
+}
+.btn.fx-cta::after {
+  content: '';
+  position: absolute;
+  left: -20%;
+  top: -50%;
+  width: 40%;
+  height: 200%;
+  transform: rotate(25deg);
+  background: linear-gradient(to right, rgba(255,255,255,0.0), rgba(255,255,255,0.35), rgba(255,255,255,0.0));
+  transition: transform 0.6s ease;
+}
+.btn.fx-cta:hover::after { transform: translateX(220%) rotate(25deg); }
+
+/* Cursor glow */
+.cursor-glow {
+  position: fixed;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 2;
+  background: radial-gradient(circle, rgba(255,255,255,0.18), rgba(255,255,255,0) 60%);
+  mix-blend-mode: screen;
+  transform: translate(-50%, -50%);
+}
+
+/* Section divider */
+.divider-wave {
+  position: relative;
+  height: 80px;
+  margin-top: 20px;
+}
+.divider-wave svg {
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  width: 100%; height: 100%;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .btn.fx-cta::after { display: none; }
+}
+
+@media (max-width: 767px) {
+  .fx-grid { height: 28vh; }
+  .fx-orb { filter: blur(3px); }
+}
+
+
