@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>AI Portfolio - TikTok Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body class="bg-gray-100">
+
+    <!-- LOGIN -->
+    <div id="loginSection" class="flex items-center justify-center h-screen">
+        <div class="bg-white p-8 rounded-xl shadow text-center">
+            <h1 class="text-xl font-bold mb-4">Portfolio AI Dashboard</h1>
+            <button onclick="login()" class="bg-black text-white px-6 py-3 rounded">
+                Login with TikTok
+            </button>
+            <div id="loading" class="hidden mt-4">Authenticating...</div>
+        </div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div id="dashboard" class="hidden p-6">
+
+        <h1 class="text-2xl font-bold mb-4">TikTok Integration Dashboard</h1>
+
+        <!-- USER INFO -->
+        <div class="bg-white p-4 rounded shadow mb-4">
+            <h2 class="font-semibold">User Profile</h2>
+            <p>@james_ai_creator</p>
+            <p>Followers: 12,340</p>
+        </div>
+
+        <!-- ANALYTICS -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+            <div class="bg-white p-4 rounded shadow">Views<br><b>120,450</b></div>
+            <div class="bg-white p-4 rounded shadow">Likes<br><b>8,320</b></div>
+            <div class="bg-white p-4 rounded shadow">Comments<br><b>1,245</b></div>
+            <div class="bg-white p-4 rounded shadow">Engagement<br><b>7.9%</b></div>
+        </div>
+
+        <!-- CHART -->
+        <div class="bg-white p-4 rounded shadow mb-6">
+            <canvas id="chart"></canvas>
+        </div>
+
+        <!-- POST CONTENT -->
+        <div class="bg-white p-4 rounded shadow mb-6">
+            <h2 class="font-semibold mb-2">Create Post</h2>
+            <input type="text" id="caption" placeholder="Enter caption..." class="border p-2 w-full mb-2">
+            <button onclick="postVideo()" class="bg-green-600 text-white px-4 py-2 rounded">
+                Post Video (Simulated)
+            </button>
+        </div>
+
+        <!-- SHARE -->
+        <div class="bg-white p-4 rounded shadow mb-6">
+            <h2 class="font-semibold mb-2">Share Content</h2>
+            <button onclick="share()" class="bg-purple-600 text-white px-4 py-2 rounded">
+                Share to TikTok Feed
+            </button>
+        </div>
+
+        <!-- AI INSIGHTS -->
+        <div class="bg-white p-4 rounded shadow mb-6">
+            <h2 class="font-semibold">AI Insights</h2>
+            <ul class="list-disc pl-5">
+                <li>Short videos perform better</li>
+                <li>Post between 6PM - 9PM</li>
+                <li>Use trending hashtags</li>
+            </ul>
+        </div>
+
+        <!-- WEBHOOK SIMULATION -->
+        <div class="mb-4">
+            <button onclick="simulateWebhook()" class="bg-blue-600 text-white px-4 py-2 rounded">
+                Simulate Webhook Event
+            </button>
+        </div>
+
+        <!-- LOG -->
+        <div class="bg-white p-4 rounded shadow">
+            <h2 class="font-semibold">Activity Log</h2>
+            <ul id="log"></ul>
+        </div>
+
+    </div>
+
+    <script>
+
+        function login() {
+            document.getElementById('loading').classList.remove('hidden');
+
+            setTimeout(() => {
+                document.getElementById('loginSection').style.display = "none";
+                document.getElementById('dashboard').classList.remove('hidden');
+                addLog("User authenticated via TikTok Login Kit");
+            }, 1500);
+        }
+
+        function postVideo() {
+            let caption = document.getElementById('caption').value;
+            addLog("Video posted: " + caption);
+        }
+
+        function share() {
+            addLog("Content shared using Share Kit");
+        }
+
+        function simulateWebhook() {
+            addLog("Webhook received: New comment from user123");
+            addLog("AI suggested reply generated");
+        }
+
+        function addLog(msg) {
+            let li = document.createElement("li");
+            li.innerText = msg;
+            document.getElementById("log").appendChild(li);
+        }
+
+        // Chart
+        new Chart(document.getElementById("chart"), {
+            type: 'line',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Views',
+                    data: [12000, 19000, 15000, 22000, 30000, 25000, 35000],
+                    borderWidth: 2
+                }]
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>
